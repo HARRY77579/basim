@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير محمد بسيم الرسمي</title>
+    <style>
+        :root {
+            --primary: #ff4d4d;
+            --dark: #1a1a1a;
+            --text: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* واجهة السؤال الأولية */
+        #welcome-screen {
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 30px; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yes-btn { background-color: #2ecc71; color: white; }
+        #no-btn { background-color: #e74c3c; color: white; position: relative; }
+
+        /* واجهة الويبسايت الكامل */
+        #main-site {
+            display: none;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .card {
+            background: #262626;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-top: 5px solid var(--primary);
+        }
+
+        .reason-list {
+            text-align: right;
+            list-style: none;
+            padding: 0;
+        }
+
+        .reason-list li {
+            background: #333;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid var(--primary);
+            font-size: 1.1rem;
+            transform: translateX(50px);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .reason-list li.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <h1>هل تريد أن تعرف يا محمد بسيم فائدتك؟</h1>
+        <div class="btn-container">
+            <button id="yes-btn" onclick="startReveal()">نعم، أريد المعرفة</button>
+            <button id="no-btn" onmouseover="moveNoButton()">لا</button>
+        </div>
+    </div>
+
+    <div id="main-site">
+        <div class="card">
+            <h1 style="color: var(--primary);">سجل البيانات التاريخي: محمد بسيم</h1>
+            <p>بعد تحليل عميق ومراجعة كافة "السحبات" والفعاليات، تبين ما يلي:</p>
+            
+            <ul class="reason-list" id="reasons">
+                <li>المستوى التقني: صديق "خرا" بامتياز مع مرتبة القرف.</li>
+                <li>تخصص النذالة: يختفي عند طلب المساعدة ويظهر عند "العزيمة".</li>
+                <li>الذكاء الاجتماعي: يسولف سالفة طويلة وبايخة في وقت غلط.</li>
+                <li>ملاحظة أمنية: يقرأ الرسائل من الإشعارات ولا يرد إلا بعد يومين.</li>
+                <li>الخلاصة: لو كان "كود برمجياً" لكان Error لا يمكن إصلاحه.</li>
+            </ul>
+
+            <h2 style="margin-top: 30px;">الحالة النهائية: 💩 (System Malfunction)</h2>
+        </div>
+    </div>
+
+    <script>
+        // دالة تحريك زر "لا" للهرب من محمد بسيم
+        function moveNoButton() {
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // دالة الانتقال للموقع الكامل
+        function startReveal() {
+            document.getElementById('welcome-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('main-site').style.display = 'block';
+                showReasons();
+            }, 500);
+        }
+
+        // إظهار الأسباب تدريجياً
+        function showReasons() {
+            const items = document.querySelectorAll('.reason-list li');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('show');
+                }, index * 600); // تظهر واحدة تلو الأخرى كل نص ثانية
+            });
+        }
+    </script>
+</body>
+</html>
